@@ -1,9 +1,12 @@
 package com.hackerzhenya.lab
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.reflect.KClass
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,7 +14,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Toast.makeText(this, "Виталя вынимай!!!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "10 миллионов лет ушло на выполнение этой задачи", Toast.LENGTH_LONG).show()
+
+        goto_battery.setOnClickListener {
+            runActivity(BatteryActivity::class)
+        }
+
+        goto_location.setOnClickListener {
+            runActivity(LocationActivity::class)
+        }
+    }
+
+    fun runActivity(cls: KClass<*>) {
+        startActivity(Intent(this, cls.java))
     }
 
     override fun onStart() {
